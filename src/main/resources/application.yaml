@@ -1,0 +1,36 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: users-service
+
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=users_db;encrypt=false;trustServerCertificate=true
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:SqlServer2026*}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+jwt:
+  secret: ${JWT_SECRET:relatos-de-papel-clave-secreta-jwt-muy-larga-para-hs256-2026}
+  expiration-ms: ${JWT_EXPIRATION_MS:900000}
+  opaque-ttl-ms: ${OPAQUE_TTL_MS:1800000}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: false
